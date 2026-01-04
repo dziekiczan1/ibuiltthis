@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import {
   CompassIcon,
   HomeIcon,
@@ -8,6 +9,7 @@ import {
 import Link from "next/link";
 import { Suspense } from "react";
 import { Button } from "../ui/button";
+import CustomUserButton from "./custom-user-button";
 
 const Logo = () => {
   return (
@@ -52,7 +54,22 @@ export default function Header() {
                 </div>
               }
             >
-              Login/Register
+              <SignedOut>
+                <SignInButton />
+                <SignUpButton>
+                  <Button>Sign Up</Button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <Button asChild>
+                  <Link href="/submit">
+                    <SparklesIcon className="size-4" />
+                    Submit Project
+                  </Link>
+                </Button>
+
+                <CustomUserButton />
+              </SignedIn>
             </Suspense>
           </div>
         </div>
