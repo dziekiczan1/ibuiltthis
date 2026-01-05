@@ -8,15 +8,10 @@ import {
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
+import { InferSelectModel } from "drizzle-orm";
+import { products } from "@/db/schema";
 
-interface ProductType {
-  id: number;
-  name: string;
-  description: string;
-  voteCount: number;
-  tags?: string[];
-  isFeatured: boolean;
-}
+type ProductType = InferSelectModel<typeof products>;
 
 export default function ProductCard({ product }: { product: ProductType }) {
   return (
