@@ -15,6 +15,7 @@ export default async function Product({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  console.log("slug", slug);
 
   return <div>product {slug}</div>;
 }

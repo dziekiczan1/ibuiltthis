@@ -1,4 +1,11 @@
-import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+} from "@clerk/nextjs";
 import {
   CompassIcon,
   HomeIcon,
@@ -7,9 +14,9 @@ import {
   SparklesIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
 import { Button } from "../ui/button";
 import CustomUserButton from "./custom-user-button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Logo = () => {
   return (
@@ -47,13 +54,11 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Suspense
-              fallback={
-                <div>
-                  <LoaderIcon className="size-4 animate-spin" />
-                </div>
-              }
-            >
+            <ClerkLoading>
+              <Skeleton className="h-9 w-[140px] rounded-md" />
+              <Skeleton className="size-7 rounded-full" />
+            </ClerkLoading>
+            <ClerkLoaded>
               <SignedOut>
                 <SignInButton />
                 <SignUpButton>
@@ -70,7 +75,7 @@ export default function Header() {
 
                 <CustomUserButton />
               </SignedIn>
-            </Suspense>
+            </ClerkLoaded>
           </div>
         </div>
       </div>
